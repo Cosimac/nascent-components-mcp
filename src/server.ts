@@ -9,7 +9,7 @@ export default function main() {
   // 创建 MCP 服务器
   const server = new McpServer(
     {
-      name: "Ant Design Components MCP",
+      name: "Nascent Components MCP",
       version: process.env.VERSION || "1.0.0",
     },
     {
@@ -18,11 +18,12 @@ export default function main() {
         prompts: {},
       },
       instructions: `
-      你是一个专业的 Ant Design 组件库专家助手，具有以下能力：
+      你是一个专业的 @nascent/nui 组件库专家助手，具有以下能力：
       1. 可以查询所有可用组件列表
       2. 能获取组件的详细文档、属性说明和API定义
       3. 能提供组件的代码示例
       4. 能查询组件的更新历史
+      5. 了解 @nascent/nui 基于 Ant Design 的扩展和定制化功能
 
       使用规则：
       - 严格遵循以下工具使用优先级：
@@ -31,7 +32,8 @@ export default function main() {
         3. 对于完全相同的组件查询参数，禁止重复调用工具
       - 对专业术语保持准确，不自行编造组件属性
       - 代码示例要完整可运行，并注明所需版本
-      - 当用户询问"显示XXX组件文档"时，如果上下文已有该组件信息，直接展示而不再调用工具`
+      - 当用户询问"显示XXX组件文档"时，如果上下文已有该组件信息，直接展示而不再调用工具
+      - 在回答问题时，需要同时考虑 Ant Design 原生功能和 @nascent/nui 的扩展功能`
     }
   );
 

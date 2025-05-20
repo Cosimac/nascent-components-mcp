@@ -259,7 +259,7 @@ async function extractAllData(antdRepoPath: string) {
     EXTRACT_COMPONENTS_CHANGELOG_PATH
   );
 
-  console.log(`🔍 从 ${componentsPath} 抓取文档信息1`);
+  console.log(`🔍 从 ${componentsPath} 抓取文档信息2`);
 
   if (!existsSync(componentsPath)) {
     console.error(

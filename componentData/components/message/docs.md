@@ -1,12 +1,17 @@
-## 何时使用
+轻量级的信息反馈组件，在顶部居中显示，并自动消失。有多种不同的提示状态可选择
+## 应用
+- 轻量级提示：顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
 - 可提供成功、警告和错误等反馈信息。
-- 顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。
+## 相关地址
+- [交互稿（UE 稿）地址](http://192.168.1.90/%E5%8D%97%E8%AE%AF%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%A8%BF/V3/ECRP%E7%BB%84%E4%BB%B6%E5%BA%93/ECRP%E7%BB%84%E4%BB%B6-UE/#g=1&p=全局提示)
+- [设计稿（UI 稿）地址](http://192.168.1.90/%E5%8D%97%E8%AE%AF%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%A8%BF/V3/ECRP%E7%BB%84%E4%BB%B6%E5%BA%93/ECRP%E7%BB%84%E4%BB%B6-UI/#p26)
 ## API
 组件提供了一些静态方法，使用方式和参数如下：
 - `message.success(content, [duration], onClose)`
 - `message.error(content, [duration], onClose)`
 - `message.info(content, [duration], onClose)`
 - `message.warning(content, [duration], onClose)`
+- `message.warn(content, [duration], onClose)` // alias of warning
 - `message.loading(content, [duration], onClose)`
 | 参数     | 说明                                        | 类型                | 默认值 |
 | -------- | ------------------------------------------- | ------------------- | ------ |
@@ -23,6 +28,7 @@
 - `message.error(config)`
 - `message.info(config)`
 - `message.warning(config)`
+- `message.warn(config)` // alias of warning
 - `message.loading(config)`
 `config` 对象属性如下：
 | 参数 | 说明 | 类型 | 默认值 |
@@ -56,14 +62,14 @@ message.config({
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | duration | 默认自动关闭延时，单位秒 | number | 3 |  |
-| getContainer | 配置渲染节点的输出位置，但依旧为全屏展示 | () => HTMLElement | () => document.body |  |
-| maxCount | 最大显示数，超过限制时，最早的消息会被自动关闭 | number | - |  |
+| getContainer | 配置渲染节点的输出位置 | () => HTMLElement | () => document.body |  |
+| maxCount | 最大显示数, 超过限制时，最早的消息会被自动关闭 | number | - |  |
 | prefixCls | 消息节点的 className 前缀 | string | `ant-message` | 4.5.0 |
 | rtl | 是否开启 RTL 模式 | boolean | false |  |
-| top | 消息距离顶部的位置 | string \| number | 8 |  |
+| top | 消息距离顶部的位置 | number | 8 |  |
 ## FAQ
-### 为什么 message 不能获取 context、redux 的内容和 ConfigProvider 的 `locale/prefixCls/theme` 等配置？
-直接调用 message 方法，antd 会通过 `ReactDOM.render` 动态创建新的 React 实体。其 context 与当前代码所在 context 并不相同，因而无法获取 context 信息。
+### 为什么 message 不能获取 context、redux 的内容和 ConfigProvider 的 `locale/prefixCls` 配置？
+直接调用 message 方法，nui 会通过 `ReactDOM.render` 动态创建新的 React 实体。其 context 与当前代码所在 context 并不相同，因而无法获取 context 信息。
 当你需要 context 信息（例如 ConfigProvider 配置的内容）时，可以通过 `message.useMessage` 方法会返回 `api` 实体以及 `contextHolder` 节点。将其插入到你需要获取 context 位置即可：
 ```tsx
 const [api, contextHolder] = message.useMessage();
@@ -77,7 +83,6 @@ return (
   </Context1.Provider>
 );
 ```
-**异同**：通过 hooks 创建的 `contextHolder` 必须插入到子元素节点中才会生效，当你不需要上下文信息时请直接调用。
-> 可通过 [App 包裹组件](/components/app-cn) 简化 `useMessage` 等方法需要手动植入 contextHolder 的问题。
+**异同：**通过 hooks 创建的 `contextHolder` 必须插入到子元素节点中才会生效，当你不需要上下文信息时请直接调用。
 ### 静态方法如何设置 prefixCls ？
-你可以通过 [`ConfigProvider.config`](/components/config-provider-cn#configproviderconfig-4130) 进行设置。
+你可以通过 [`ConfigProvider.config`](</components/config-provider/#ConfigProvider.config()-4.13.0+>) 进行设置。

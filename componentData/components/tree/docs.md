@@ -1,8 +1,12 @@
-## 何时使用
-文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用 `树控件` 可以完整展现其中的层级关系，并具有展开收起选择等交互功能。
+多层次的结构列表。
+## 应用
+文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。
+使用 `树形控件` 可以完整展现其中的层级关系，并具有展开、收起、选择等交互功能。
+## 相关地址
+- [交互稿（UE 稿）地址](http://192.168.1.90/%E5%8D%97%E8%AE%AF%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%A8%BF/V3/ECRP%E7%BB%84%E4%BB%B6%E5%BA%93/ECRP%E7%BB%84%E4%BB%B6-UE/#g=1&p=%E6%A0%91%E5%BD%A2%E6%8E%A7%E4%BB%B6)
+- [设计稿（UI 稿）地址](http://192.168.1.90/%E5%8D%97%E8%AE%AF%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1%E7%A8%BF/V3/ECRP%E7%BB%84%E4%BB%B6%E5%BA%93/ECRP%E7%BB%84%E4%BB%B6-UI/#p29)
 ## API
 ### Tree props
-<!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | allowDrop | 是否允许拖拽时放置在该节点 | ({ dropNode, dropPosition }) => boolean | - |  |
@@ -17,36 +21,35 @@
 | defaultExpandParent | 默认展开父节点 | boolean | true |  |
 | defaultSelectedKeys | 默认选中的树节点 | string\[] | \[] |  |
 | disabled | 将树禁用 | boolean | false |  |
-| draggable | 设置节点可拖拽，可以通过 `icon: false` 关闭拖拽提示图标 | boolean \| ((node: DataNode) => boolean) \| { icon?: React.ReactNode \| false, nodeDraggable?: (node: DataNode) => boolean } | false | `config`: 4.17.0 |
+| draggable | 设置节点可拖拽（IE>8） | boolean \| ((node: DataNode) => boolean) | false |  |
 | expandedKeys | （受控）展开指定的树节点 | string\[] | \[] |  |
-| fieldNames | 自定义节点 title、key、children 的字段 | object | { title: `title`, key: `key`, children: `children` } | 4.17.0 |
 | filterTreeNode | 按需筛选树节点（高亮），返回 true | function(node) | - |  |
 | height | 设置虚拟滚动容器高度，设置后内部节点不再支持横向滚动 | number | - |  |
-| icon | 在标题之前插入自定义图标。需要设置 `showIcon` 为 true | ReactNode \| (props) => ReactNode | - |  |
+| icon | 自定义树节点图标。 | ReactNode \| (props) => ReactNode | - |  |
 | loadData | 异步加载数据 | function(node) | - |  |
 | loadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string\[] | \[] |  |
 | multiple | 支持点选多个节点（节点本身） | boolean | false |  |
-| rootStyle | 添加在 Tree 最外层的 style | CSSProperties | - | 4.20.0 |
-| selectable | 是否可选中 | boolean | true |  |
-| selectedKeys | （受控）设置选中的树节点，多选需设置 `multiple` 为 true | string\[] | - |  |
-| showIcon | 控制是否展示 `icon` 节点，没有默认样式 | boolean | false |  |
-| showLine | 是否展示连接线 | boolean \| { showLeafIcon: ReactNode \| ((props: AntTreeNodeProps) => ReactNode) } | false |  |
-| switcherIcon | 自定义树节点的展开/折叠图标（带有默认 rotate 角度样式） | ReactNode \| ((props: AntTreeNodeProps) => ReactNode) | - | renderProps: 4.20.0 |
-| switcherLoadingIcon | 自定义树节点的加载图标 | ReactNode | - | 5.20.0 |
+| selectable | 是否可选中，为`false`且配置了`checkable`时，点击整行等同于点击复选框 | boolean | true |  |
+| selectedKeys | （受控）设置选中的树节点 | string\[] | - |  |
+| showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |  |
+| showLine | 是否展示连接线 | boolean \| {showLeafIcon: boolean} | false |  |
+| switcherIcon | 自定义树节点的展开/折叠图标 | ReactNode | - |  |
 | titleRender | 自定义渲染节点 | (nodeData) => ReactNode | - | 4.5.0 |
 | treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（key 在整个树范围内唯一） | array&lt;{key, title, children, \[disabled, selectable]}> | - |  |
 | virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 4.1.0 |
-| onCheck | 点击复选框触发 | function(checkedKeys, e:{checked: boolean, checkedNodes, node, event, halfCheckedKeys}) | - |  |
+| \*\*size | 树节点大小 | `default` \| `small` | `default` |  |
+| \*\*titleOption | 树后方下拉菜单 | `SchemaDropdown` | - |  |
+| onCheck | 点击复选框触发 | function(checkedKeys, e:{checked: bool, checkedNodes, node, event, halfCheckedKeys}) | - |  |
 | onDragEnd | dragend 触发时调用 | function({event, node}) | - |  |
 | onDragEnter | dragenter 触发时调用 | function({event, node, expandedKeys}) | - |  |
 | onDragLeave | dragleave 触发时调用 | function({event, node}) | - |  |
 | onDragOver | dragover 触发时调用 | function({event, node}) | - |  |
 | onDragStart | 开始拖拽时调用 | function({event, node}) | - |  |
 | onDrop | drop 触发时调用 | function({event, node, dragNode, dragNodesKeys}) | - |  |
-| onExpand | 展开/收起节点时触发 | function(expandedKeys, {expanded: boolean, node}) | - |  |
+| onExpand | 展开/收起节点时触发 | function(expandedKeys, {expanded: bool, node}) | - |  |
 | onLoad | 节点加载完毕时触发 | function(loadedKeys, {event, node}) | - |  |
 | onRightClick | 响应右键点击 | function({event, node}) | - |  |
-| onSelect | 点击树节点触发 | function(selectedKeys, e:{selected: boolean, selectedNodes, node, event}) | - |  |
+| onSelect | 点击树节点触发 | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) | - |  |
 ### TreeNode props
 | 参数 | 说明 | 类型 | 默认值 |  |
 | --- | --- | --- | --- | --- |
@@ -68,7 +71,7 @@
 {
   this.state.treeData.length ? (
     <Tree>
-      {this.state.treeData.map((data) => (
+      {this.state.treeData.map(data => (
         <TreeNode />
       ))}
     </Tree>
@@ -82,8 +85,10 @@
 | --- | --- |
 | scrollTo({ key: string \| number; align?: 'top' \| 'bottom' \| 'auto'; offset?: number }) | 虚拟滚动下，滚动到指定 key 条目 |
 ## FAQ
-### defaultExpandAll 在异步加载数据时为何不生效？
-`default` 前缀属性只有在初始化时生效，因而异步加载数据时 `defaultExpandAll` 已经执行完成。你可以通过受控 `expandedKeys` 或者在数据加载完成后渲染 Tree 来实现全部展开。
+### 在 showLine 时，如何隐藏子节点图标？
+文件图标通过 switcherIcon 来实现，如果不需要你可以覆盖对应的样式：<https://codesandbox.io/s/883vo47xp8>
+### defaultExpandedAll 在异步加载数据时为何不生效？
+`default` 前缀属性只有在初始化时生效，因而异步加载数据时 `defaultExpandedAll` 已经执行完成。你可以通过受控 `expandedKeys` 或者在数据加载完成后渲染 Tree 来实现全部展开。
 ### 虚拟滚动的限制
 虚拟滚动通过在仅渲染可视区域的元素来提升渲染性能。但是同时由于不会渲染所有节点，所以无法自动拓转横向宽度（比如超长 `title` 的横向滚动条）。
 ### `disabled` 节点在树中的关系是什么？

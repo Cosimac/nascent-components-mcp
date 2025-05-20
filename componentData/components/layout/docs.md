@@ -1,3 +1,4 @@
+协助进行页面级整体布局。
 ## 设计规则
 ### 尺寸
 一级导航项偏左靠近 logo 放置，辅助菜单偏右放置。
@@ -46,11 +47,12 @@
 | className | 容器 className | string | - |
 | hasSider | 表示子元素里有 Sider，一般不用指定。可用于服务端渲染时避免样式闪动 | boolean | - |
 | style | 指定样式 | CSSProperties | - |
+> `Layout.Header` `Layout.Footer` `Layout.Content` API 与 `Layout` 相同
 ### Layout.Sider
 侧边栏。
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| breakpoint | 触发响应式布局的[断点](/components/grid-cn#col) | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `xxl` | - |
+| breakpoint | 触发响应式布局的[断点](/components/grid/#Col) | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `xxl` | - |
 | className | 容器 className | string | - |
 | collapsed | 当前收起状态 | boolean | - |
 | collapsedWidth | 收缩宽度，设置为 0 会出现特殊 trigger | number | 80 |
@@ -62,7 +64,7 @@
 | trigger | 自定义 trigger，设置为 null 时隐藏 trigger | ReactNode | - |
 | width | 宽度 | number \| string | 200 |
 | zeroWidthTriggerStyle | 指定当 `collapsedWidth` 为 0 时出现的特殊 trigger 的样式 | object | - |
-| onBreakpoint | 触发响应式布局[断点](/components/grid-cn#api)时的回调 | (broken) => {} | - |
+| onBreakpoint | 触发响应式布局[断点](/components/grid/#API)时的回调 | (broken) => {} | - |
 | onCollapse | 展开-收起时的回调函数，有点击 trigger 以及响应式反馈两种方式可以触发 | (collapsed, type) => {} | - |
 #### breakpoint width
 ```js
@@ -75,3 +77,11 @@
   xxl: '1600px',
 }
 ```
+<style>
+  [data-theme="dark"] .site-layout-background {
+    background: #141414;
+  }
+  [data-theme="dark"] .site-layout-header-background {
+    background: #1f1f1f;
+  }
+</style>

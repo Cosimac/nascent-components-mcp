@@ -35,7 +35,7 @@
     "dev": "tsup --watch",
     "pretest": "tsup",
     "test": "tsx test-server.ts",
-    "extract": "tsx cli.ts extract ../ant-design",
+    "extract": "tsx cli.ts extract ../nui-v3-master",
     "inspector": "pnpm build & npx @modelcontextprotocol/inspector node dist/cli.js",
     "prepublishOnly": "pnpm build"
   },
